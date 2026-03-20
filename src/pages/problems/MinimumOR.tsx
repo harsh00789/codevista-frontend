@@ -66,7 +66,7 @@ const MinimumOR: React.FC = () => {
       const res = await apiClient.post<ApiResponse>('/api/problems/minimum-or/3858', parsed);
       setSteps(res.data.steps); setFinalAns(res.data.finalAns);
       setCurrentStep(0); setIsPlaying(true);
-    } catch { setError('Backend unreachable. Is port 8081 running?'); }
+    } catch { setError('Backend unreachable. Please ensure the server is running.'); }
     finally { setIsLoading(false); }
   }, [gridInput]);
 
