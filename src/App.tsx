@@ -25,7 +25,8 @@ const App: React.FC = () => {
             <Route path="/leetcode/minimum-or" element={<MinimumOR />} />
             
             {/* System Design Routes */}
-            <Route path="/system-design" element={<SystemDesign />} />
+            <Route path="/system-design" element={<Navigate to="/system-design/url-shortener" replace />} />
+            <Route path="/system-design/url-shortener" element={<SystemDesign />} />
 
             {/* Redirects for backward compatibility */}
             <Route path="/bubble-sort" element={<Navigate to="/dsa/bubble-sort" replace />} />

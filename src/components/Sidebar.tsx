@@ -84,12 +84,12 @@ const Sidebar: React.FC = () => {
 
                 {activeMode === 'SysD' && (
                     <div className="sidebar-section">
-                        <div className="sidebar-label">Architecture Patterns</div>
+                        <div className="sidebar-label">High-Level Designs</div>
                         <div className="problem-list">
-                            <NavLink to="/system-design" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
+                            <NavLink to="/system-design/url-shortener" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
                                 <div className="prob-diff medium"></div>
-                                <span className="prob-name">System Design</span>
-                                <span className="prob-num">LD</span>
+                                <span className="prob-name">URL Shortener</span>
+                                <span className="prob-num">HLD</span>
                             </NavLink>
                         </div>
                     </div>
