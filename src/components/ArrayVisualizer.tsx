@@ -56,8 +56,8 @@ const ArrayVisualizer: React.FC<ArrayVisualizerProps> = ({
                             >
                                 {(isI || isJ) && (
                                     <div className="pointer-label-container">
-                                        {isI && <span className="pointer-i">{labelI}</span>}
-                                        {isJ && <span className="pointer-j">{labelJ}</span>}
+                                        {isI && <span className="pointer-i" style={{ background: 'var(--accent-glass)', color: 'var(--accent-primary)', border: '1px solid var(--accent-glass)' }}>{labelI}</span>}
+                                        {isJ && <span className="pointer-j" style={{ background: 'rgba(6, 182, 212, 0.1)', color: 'var(--accent-cyan)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>{labelJ}</span>}
                                     </div>
                                 )}
                             </motion.div>

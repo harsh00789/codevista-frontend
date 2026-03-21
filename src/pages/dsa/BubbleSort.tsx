@@ -115,11 +115,11 @@ const BubbleSort: React.FC = () => {
 
             {/* Story Chapters */}
             <div className="mo-story mb-8 pb-4">
-                <div className="mo-story-accent"></div>
+                <div className="mo-story-accent" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-purple), var(--accent-cyan))' }}></div>
                 <div className="story-body">
                     <div className="story-chapter">
                         <div className="chapter-line">
-                            <div className="chapter-dot dot-1">01</div>
+                            <div className="chapter-dot dot-1" style={{ background: 'var(--accent-glass)', color: 'var(--accent-primary)', border: '1px solid var(--accent-glass)' }}>01</div>
                             <div className="chapter-connector"></div>
                         </div>
                         <div className="chapter-content">
@@ -131,7 +131,7 @@ const BubbleSort: React.FC = () => {
 
                     <div className="story-chapter">
                         <div className="chapter-line">
-                            <div className="chapter-dot dot-2">02</div>
+                            <div className="chapter-dot dot-2" style={{ background: 'var(--accent-glass)', color: 'var(--accent-primary)', border: '1px solid var(--accent-glass)' }}>02</div>
                             <div className="chapter-connector"></div>
                         </div>
                         <div className="chapter-content">
@@ -143,7 +143,7 @@ const BubbleSort: React.FC = () => {
 
                     <div className="story-chapter">
                         <div className="chapter-line">
-                            <div className="chapter-dot dot-3">03</div>
+                            <div className="chapter-dot dot-3" style={{ background: 'var(--accent-glass)', color: 'var(--accent-primary)', border: '1px solid var(--accent-glass)' }}>03</div>
                             <div className="chapter-connector"></div>
                         </div>
                         <div className="chapter-content">
@@ -155,7 +155,7 @@ const BubbleSort: React.FC = () => {
 
                     <div className="story-chapter">
                         <div className="chapter-line">
-                            <div className="chapter-dot dot-4">04</div>
+                            <div className="chapter-dot dot-4" style={{ background: 'var(--accent-glass)', color: 'var(--accent-primary)', border: '1px solid var(--accent-glass)' }}>04</div>
                         </div>
                         <div className="chapter-content">
                             <div className="chapter-label">The Lesson</div>

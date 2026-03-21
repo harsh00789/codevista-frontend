@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Code2, LayoutDashboard } from 'lucide-react';
+import { Code2, LayoutDashboard, Linkedin } from 'lucide-react';
 
 type Mode = 'DSA' | 'LeetCode' | 'SysD';
 
@@ -17,8 +17,10 @@ const Sidebar: React.FC = () => {
     return (
         <aside className="sidebar">
             <NavLink to="/" className="sidebar-logo">
-                <Code2 size={24} className="sidebar-logo-icon" />
-                <span className="sidebar-logo-text">CodeVista</span>
+                <div className="card-icon" style={{ marginBottom: 0, width: 40, height: 40, background: 'var(--accent-glass)' }}>
+                    <Code2 size={22} className="sidebar-logo-icon" style={{ color: 'var(--accent-primary)' }} />
+                </div>
+                <span className="sidebar-logo-text gradient-text">CodeVista</span>
             </NavLink>
 
             <nav className="sidebar-nav">
@@ -49,7 +51,7 @@ const Sidebar: React.FC = () => {
                 </div>
 
                 {activeMode === 'DSA' && (
-                    <div className="sidebar-section">
+                    <div className="sidebar-section animate-fade-in">
                         <div className="sidebar-label">Sorting Algorithms</div>
                         <div className="problem-list">
                             <NavLink to="/dsa/bubble-sort" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
@@ -62,7 +64,7 @@ const Sidebar: React.FC = () => {
                 )}
 
                 {activeMode === 'LeetCode' && (
-                    <div className="sidebar-section">
+                    <div className="sidebar-section animate-fade-in">
                         <div className="sidebar-label">Array & Strings</div>
                         <div className="problem-list">
                             <NavLink to="/leetcode/two-sum" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
@@ -83,7 +85,7 @@ const Sidebar: React.FC = () => {
                 )}
 
                 {activeMode === 'SysD' && (
-                    <div className="sidebar-section">
+                    <div className="sidebar-section animate-fade-in">
                         <div className="sidebar-label">High-Level Designs</div>
                         <div className="problem-list">
                             <NavLink to="/system-design/url-shortener" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
@@ -97,7 +99,17 @@ const Sidebar: React.FC = () => {
             </nav>
 
             <div className="sidebar-footer">
-                Built with <span>CodeVista</span>
+                <div style={{ opacity: 0.6, marginBottom: '8px' }}>Developed by</div>
+                <a 
+                    href="https://www.linkedin.com/in/harsh-thaker-658b48218/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex-row"
+                    style={{ justifyContent: 'center', gap: '8px' }}
+                >
+                    <Linkedin size={16} style={{ color: 'var(--accent-primary)' }} />
+                    <span className="gradient-text" style={{ fontSize: '0.85rem', fontWeight: 700 }}>Harsh Thaker</span>
+                </a>
             </div>
         </aside>
     );
