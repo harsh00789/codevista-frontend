@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
@@ -6,9 +6,28 @@ import BubbleSort from './pages/dsa/BubbleSort';
 import TwoSum from './pages/problems/TwoSum';
 import MinimumOR from './pages/problems/MinimumOR';
 import SystemDesign from './pages/systemdesign/SystemDesign';
+import apiClient from './api/client';
 import './index.css';
 
 const App: React.FC = () => {
+  // Keep-alive mechanism to prevent Render free instance from sleeping
+  useEffect(() => {
+    const keepBackendAwake = async () => {
+      try {
+        await apiClient.get('/');
+      } catch (error) {
+        // Discard errors, we just want to wake up the server
+      }
+    };
+    
+    // Hit immediately on load
+    keepBackendAwake();
+
+    // Hit the backend every 5 minutes (5 * 60 * 1000 = 300000ms)
+    const interval = setInterval(keepBackendAwake, 300000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="app-container">
