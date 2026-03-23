@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Play, Pause, RotateCcw, SkipForward, SkipBack, Loader2 } from 'lucide-react';
 import apiClient from '../../api/client';
+import ComplexityChart from '../../components/ComplexityChart';
 
 /* ─── TYPES ─── */
 interface RowState { numbers: number[]; validNumbers: number[]; candidateFound: boolean; }
@@ -159,11 +160,8 @@ const MinimumOR: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Two-column Layout ── */}
-      <div className="mo-layout">
-
-        {/* LEFT MAIN */}
-        <div className="mo-main">
+      {/* ── Main Workspace ── */}
+      <div className="mt-4">
 
           {/* Input */}
           <div className="glass-panel input-group">
@@ -311,75 +309,84 @@ const MinimumOR: React.FC = () => {
           )}
         </div>
 
-        {/* RIGHT PANEL */}
-        <div className="mo-right">
+          {/* BELOW VISUALIZATION: METADATA GRID */}
+          <div className="metadata-grid mt-12 mb-12">
+            <div className="flex-column gap-6">
+              {/* Code Card */}
+              <div className="code-window">
+                <div className="code-header">
+                  <div className="code-dots">
+                    <div className="code-dot" style={{ backgroundColor: '#ff5f56' }}></div>
+                    <div className="code-dot" style={{ backgroundColor: '#ffbd2e' }}></div>
+                    <div className="code-dot" style={{ backgroundColor: '#27c93f' }}></div>
+                  </div>
+                  <span className="text-sm text-secondary font-mono">MinimumOR.java</span>
+                </div>
+                <div className="code-content" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                  <pre style={{ margin: 0, padding: 0, background: 'transparent', whiteSpace: 'pre', overflowX: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', color: '#e2e8f0', lineHeight: 1.6 }}>
+                    <code>{JAVA_CODE}</code>
+                  </pre>
+                </div>
+              </div>
 
-          {/* Code Card */}
-          <div className="code-window">
-            <div className="code-header">
-              <div className="code-dots">
-                <div className="code-dot" style={{ backgroundColor: '#ff5f56' }}></div>
-                <div className="code-dot" style={{ backgroundColor: '#ffbd2e' }}></div>
-                <div className="code-dot" style={{ backgroundColor: '#27c93f' }}></div>
-              </div>
-              <span className="text-sm text-secondary font-mono">MinimumOR.java</span>
-            </div>
-            <div className="code-content">{JAVA_CODE}</div>
-          </div>
-
-          {/* Complexity */}
-          <div className="mo-panel">
-            <div className="mo-section-title">📊 Complexity</div>
-            <div className="mo-cx-row">
-              <div className="mo-cx-item">
-                <span className="mo-cx-label">Time</span>
-                <span className="mo-cx-badge mo-cx-time">O(18 · m · n)</span>
-              </div>
-              <div className="mo-cx-item">
-                <span className="mo-cx-label">Space</span>
-                <span className="mo-cx-badge mo-cx-space">O(1)</span>
-              </div>
-              <div className="mo-cx-detail">
-                <div className="mo-cx-line"><span>Outer loop</span><span>18 bits</span></div>
-                <div className="mo-cx-line"><span>Inner loop</span><span>m × n cells</span></div>
-              </div>
-            </div>
-          </div>
-
-          {/* How It Works */}
-          <div className="mo-panel">
-            <div className="mo-section-title">📘 How It Works</div>
-            <div className="mo-how-steps">
-              <div className="mo-how-step">
-                <span className="mo-how-num">1</span>
-                <span>Start from bit 17 (highest). Try keeping it OFF.</span>
-              </div>
-              <div className="mo-how-step">
-                <span className="mo-how-num">2</span>
-                <span>Build permission slip = locked bits + all lower bits.</span>
-              </div>
-              <div className="mo-how-step">
-                <span className="mo-how-num">3</span>
-                <span>Check: can every row give a valid candidate?</span>
-              </div>
-              <div className="mo-how-step">
-                <span className="mo-how-num">4</span>
-                <span>If not → force the bit ON into finalAns.</span>
+              {/* How It Works */}
+              <div className="glass-panel">
+                <h3 className="text-lg font-semibold mb-3">How It Works</h3>
+                <div className="mo-how-steps" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div className="mo-how-step" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span className="mo-how-num" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>1</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>Start from bit 17 (highest). Try keeping it OFF.</span>
+                  </div>
+                  <div className="mo-how-step" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span className="mo-how-num" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>2</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>Build permission slip = locked bits + all lower bits.</span>
+                  </div>
+                  <div className="mo-how-step" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span className="mo-how-num" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>3</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>Check: can every row give a valid candidate?</span>
+                  </div>
+                  <div className="mo-how-step" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span className="mo-how-num" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, flexShrink: 0 }}>4</span>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>If not → force the bit ON into finalAns.</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Tags */}
-          <div className="mo-panel">
-            <div className="mo-section-title">🏷 Topics</div>
-            <div className="mo-tags">
-              {['Bit Manipulation', 'Greedy', 'Matrix', 'Bitmask', 'Enumeration'].map(t => (
-                <span key={t} className="mo-tag">{t}</span>
-              ))}
+            <div className="flex-column gap-6">
+              {/* Complexity Analysis */}
+              <div className="glass-panel complexity-card">
+                  <h3 className="text-lg font-semibold mb-2">Complexity Analysis</h3>
+
+                  <div className="complexity-item">
+                      <span className="complexity-label">Time Complexity</span>
+                      <div className="badge-complexity badge-blue text-lg">
+                          O(18 · M · N)
+                      </div>
+                      <ComplexityChart algorithmType="O(M*N)" />
+                      <p className="text-sm text-secondary mt-1">We loop 18 times (for each bit) evaluating all cells `M × N` ensuring each candidate fits securely on the bitmask slip.</p>
+                  </div>
+
+                  <div className="complexity-item">
+                      <span className="complexity-label">Space Complexity</span>
+                      <div className="badge-complexity badge-purple text-lg">
+                          O(1)
+                      </div>
+                      <p className="text-sm text-secondary mt-1">Negligible Extra Space used! Constant auxiliary variables efficiently record bit statuses.</p>
+                  </div>
+              </div>
+
+              {/* Tags */}
+              <div className="glass-panel">
+                <h3 className="text-sm font-semibold mb-3 text-secondary uppercase tracking-wider">Algorithm Tags</h3>
+                <div className="flex-row" style={{ flexWrap: 'wrap', gap: '8px' }}>
+                  {['Bit Manipulation', 'Greedy', 'Matrix', 'Bitmask', 'Enumeration'].map(t => (
+                    <div key={t} className="info-chip">{t}</div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 };

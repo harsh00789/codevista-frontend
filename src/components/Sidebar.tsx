@@ -81,6 +81,14 @@ const Sidebar: React.FC = () => {
                                 <span className="prob-num">#3858</span>
                             </NavLink>
                         </div>
+                        <div className="sidebar-label mt-2">Matrix DP</div>
+                        <div className="problem-list">
+                            <NavLink to="/leetcode/max-product-path" className={({ isActive }) => `problem-item ${isActive ? 'active' : ''}`}>
+                                <div className="prob-diff medium"></div>
+                                <span className="prob-name">Max Prod Path</span>
+                                <span className="prob-num">#1594</span>
+                            </NavLink>
+                        </div>
                     </div>
                 )}
 
